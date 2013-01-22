@@ -1,0 +1,49 @@
+﻿<!DOCTYPE>
+
+<html>
+<head>
+    <link href="touch/resources/css/sencha-touch.css" rel="stylesheet" type="text/css" /> 
+    <script src="touch/sencha-touch-all.js"></script>
+    <script>
+        Ext.define("Employee", {
+            extend: "Ext.data.Model",
+            config: {
+                fields: ["name", "yearsOfExp"]
+            }
+        });
+        var empStore = Ext.create("Ext.data.Store", {
+            model: "Employee",
+            data: [
+                    { 'name': 'Sam', 'yearsOfExp': 12 },
+                    { 'name': 'Ram', 'yearsOfExp': 7 },
+                    { 'name': 'Kim', 'yearsOfExp': 16 },
+                    { 'name': 'John', 'yearsOfExp': 21 },
+                    { 'name': 'Mary', 'yearsOfExp': 13 }
+                ]
+        });
+        Ext.application({
+            launch: function () {
+                Ext.Viewport.setLayout('fit');
+                Ext.Viewport.add({
+                    xtype: "polar",
+                    store: empStore,
+                    animate: true,
+                    interactions: ['rotate'],
+                    colors: ["#115fa6", "#94ae0a", "#a61120", "#ff8809", "#ffd13e"],
+                    series: [
+                                {
+                                    type: 'pie',
+                                    labelField: 'name',
+                                    xField: 'yearsOfExp',
+                                    donut: 30
+                                }
+                    ]
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
